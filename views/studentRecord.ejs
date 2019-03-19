@@ -3,7 +3,7 @@
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </head>
+      </head>
 
    <body>
         <nav class="navbar">
@@ -21,7 +21,7 @@
           <div class="row">
               <div class="form-group col-sm-6" >
                   <label for="studentName" >Student Name:</label>
-                  <input placeholder="Enter Student name" id="studentName"  type="text" class="form-control">
+                  <input id="myInput" onkeyup="myFunction()" placeholder="Enter Student name"  type="text" class="form-control">
                 </div>
                 <div class="form-group col-sm-6">
                   <label for="addNo"  >Admission Number</label>
@@ -29,15 +29,53 @@
                 </div>
             </div>
             </form> 
-        </div>
-         <table>
+          </div>
+          <div class="container">
+            <br>
+         <table class="table table-striped" id="myTable">
+            <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Admission Number</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Phone Number</th>
+                </tr>
+              </thead>
+              <tbody>
            <% for(var i =0;i<docs.length;i++){ %>
               <tr>
                 <td><%= docs[i].name %></td>
+                <td scope="row"><%= docs[i]._id %></td>
                 <td><%= docs[i].age %></td>
+                <td><%= docs[i].parentPhone%></td>
               </tr>
            <% } %>
+          </tbody>
          </table>
+         <script>
+            function myFunction() {
+              // Declare variables 
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("myTable");
+              tr = table.getElementsByTagName("tr");
+            
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                } 
+              }
+            }
+            </script>
+        </div>
          <script type="text/javascript" src="js/materialize.min.js"></script>
    </body>
  </html>

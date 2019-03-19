@@ -29,7 +29,6 @@ app.get("/studentRecord",function(req,res){
     collection.find({}).toArray(function(err,result){
       if (err) throw err;
       res.render('studentRecord' , {docs:result} );
-       client.close();
     }  )
    
   });
