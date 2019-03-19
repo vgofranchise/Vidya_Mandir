@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>  
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+
+   <body>
+        <nav class="navbar">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="#">WebSiteName</a>
+                      </div>
+                      <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                      </ul>
+                    </div>
+                  </nav>
+        <div class="container bg-primary text-white" >
+          <form action="/action_page.php">
+          <div class="row">
+              <div class="form-group col-sm-6" >
+                  <label for="studentName" >Student Name:</label>
+                  <input placeholder="Enter Student name" id="studentName"  type="text" class="form-control">
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="addNo"  >Admission Number</label>
+                  <input placeholder="Enter Add.No" id="id" type="text" class="form-control">
+                </div>
+            </div>
+            </form> 
+        </div>
+         <table>
+           <% for(var i =0;i<docs.length;i++){ %>
+              <tr>
+                <td><%= docs[i].name %></td>
+                <td><%= docs[i].age %></td>
+              </tr>
+           <% } %>
+         </table>
+         <script type="text/javascript" src="js/materialize.min.js"></script>
+   </body>
+ </html>
