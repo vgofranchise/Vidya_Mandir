@@ -1,13 +1,19 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var bodyParser = require('body-parser');
 
+//Body parser Middelware
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+app.set('view engine','ejs');
+app.set('views',path.join(__dirname,'views'));
+
+//DataBase Collection
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://Anand_Kumar:thalathalapathy@vidyamandir-vzvtf.mongodb.net/test?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
-
-
-
 
 app.get('/',function(req,res){
     res.send("Node file test sucess!!");
@@ -22,8 +28,7 @@ app.get("/studentRecord",function(req,res){
     const collection = client.db("VidyaMandir").collection("studentRecords");
     collection.find({}).toArray(function(err,result){
       if (err) throw err;
-      res.send(result);
-      console.log(result);
+      res.render('studentRecord' , {docs:result} );
        client.close();
     }  )
    
