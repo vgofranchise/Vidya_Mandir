@@ -21,11 +21,11 @@
           <div class="row">
               <div class="form-group col-sm-6" >
                   <label for="studentName" >Student Name:</label>
-                  <input id="myInput" onkeyup="myFunction()" placeholder="Enter Student name"  type="text" class="form-control">
+                  <input id="searchName" onkeyup="searchByName()" placeholder="Enter Student name"  type="text" class="form-control">
                 </div>
                 <div class="form-group col-sm-6">
                   <label for="addNo"  >Admission Number</label>
-                  <input placeholder="Enter Add.No" id="id" type="text" class="form-control">
+                  <input onkeyup="searchById()" placeholder="Enter Add.No" id="searchId" type="text" class="form-control">
                 </div>
             </div>
             </form> 
@@ -44,8 +44,8 @@
               <tbody>
            <% for(var i =0;i<docs.length;i++){ %>
               <tr>
-                <td><%= docs[i].name %></td>
                 <td scope="row"><%= docs[i]._id %></td>
+                <td><%= docs[i].name %></td>
                 <td><%= docs[i].age %></td>
                 <td><%= docs[i].parentPhone%></td>
               </tr>
@@ -53,10 +53,32 @@
           </tbody>
          </table>
          <script>
-            function myFunction() {
+            function searchByName() {
               // Declare variables 
               var input, filter, table, tr, td, i, txtValue;
-              input = document.getElementById("myInput");
+              input = document.getElementById("searchName");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("myTable");
+              tr = table.getElementsByTagName("tr");
+            
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                } 
+              }
+            }
+
+            function searchById() {
+              // Declare variables 
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("searchId");
               filter = input.value.toUpperCase();
               table = document.getElementById("myTable");
               tr = table.getElementsByTagName("tr");
